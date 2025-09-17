@@ -3,8 +3,8 @@
     public class Knight:Piece
     {
         public override PieceType Type => PieceType.Knight;
-        public override string Color { get; }
-        public Knight(string color)
+        public override Player Color { get; }
+        public Knight(Player color)
         {
             Color = color;
         }

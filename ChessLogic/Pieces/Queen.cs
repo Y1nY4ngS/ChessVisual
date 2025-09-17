@@ -3,8 +3,8 @@
     public class Queen: Piece
     {
         public override PieceType Type => PieceType.Queen;
-        public override string Color { get; }
-        public Queen(string color)
+        public override Player Color { get; }
+        public Queen(Player color)
         {
             Color = color;
         }

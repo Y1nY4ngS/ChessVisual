@@ -3,7 +3,7 @@
     public class Bishop: Piece
     {
         public override PieceType Type => PieceType.Bishop;
-        public override string Color { get; }
+        public override Player Color { get; }
         public Bishop(string color)
         {
             Color = color;

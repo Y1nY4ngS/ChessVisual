@@ -3,8 +3,8 @@
     public class Rook: Piece
     {
         public override PieceType Type => PieceType.Rook;
-        public override string Color { get; }
-        public Rook(string color)
+        public override Player Color { get; }
+        public Rook(Player color)
         {
             Color = color;
         }

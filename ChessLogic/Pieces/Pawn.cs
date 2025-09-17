@@ -2,8 +2,8 @@
 {
     public class Pawn : Piece
     {         public override PieceType Type => PieceType.Pawn;
-        public override string Color { get; }
-        public Pawn(string color)
+        public override Player Color { get; }
+        public Pawn(Player color)
         {
             Color = color;
         }
