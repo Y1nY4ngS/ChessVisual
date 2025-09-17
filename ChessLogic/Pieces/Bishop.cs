@@ -4,7 +4,15 @@
     {
         public override PieceType Type => PieceType.Bishop;
         public override Player Color { get; }
-        public Bishop(string color)
+
+        private static readonly Direction[] dirs = new Direction[]
+        {
+            Direction.NorthEast,
+            Direction.NorthWest,
+            Direction.SouthEast,
+            Direction.SouthWest
+        };
+        public Bishop(Player color)
         {
             Color = color;
         }
@@ -13,6 +21,11 @@
             Bishop copy = new(Color);
             copy.HasMoved = HasMoved;
             return copy;
+        }
+
+        public override IEnumerable<Move> GetMoves(Position from, Board board)
+        {
+            return MovePositionInDirs(from, board, dirs).Select(to => new NormalMove(from, to));
         }
     }
 }
