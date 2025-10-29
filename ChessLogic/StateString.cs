@@ -4,6 +4,7 @@ namespace ChessLogic
 {
     public class StateString
     {
+        /*
         private readonly StringBuilder sb = new();
 
         public StateString(Player currentPlayer, Board board)
@@ -37,7 +38,7 @@ namespace ChessLogic
 
             if (piece.Color == Player.White)
             {
-                c = char.ToUpper(c);
+                return char.ToUpper(c);
             }
 
             return c;
@@ -102,7 +103,7 @@ namespace ChessLogic
             bool castleBKS = board.CastleRightKS(Player.Black);
             bool castleBQS = board.CastleRightQS(Player.Black);
 
-            if (!castleWKS && !castleWQS && !castleBKS && !castleBQS)
+            if (!(castleWKS || castleWQS || castleBKS || castleBQS))
             {
                 sb.Append('-');
                 return;
@@ -139,6 +140,6 @@ namespace ChessLogic
             int rank = 8 - pos.Row;
             sb.Append(file);
             sb.Append(rank);
-        }
+        }*/
     }
 }

@@ -7,17 +7,17 @@
         public Result Result { get; private set; } = null!;
 
         private int noCaptureOrPawnMoves = 0;
-        private string stateString;
+        //private string stateString;
 
-        private readonly Dictionary<string, int> stateHistory = new();
+       // private readonly Dictionary<string, int> stateHistory = new();
 
         public GameState(Player player, Board board)
         {
             CurrentPlayer = player;
             Board = board;
 
-            stateString = new StateString(CurrentPlayer, Board).ToString();
-            stateHistory[stateString] = 1;
+            //stateString = new StateString(CurrentPlayer, Board).ToString();
+            //stateHistory[stateString] = 1;
         }
 
         public IEnumerable<Move> LegalMovesForPieces(Position pos)
@@ -40,14 +40,14 @@
             if (captureOrPawn)
             {
                 noCaptureOrPawnMoves = 0;
-                stateHistory.Clear();
+                //stateHistory.Clear();
             }
             else
             {
                 noCaptureOrPawnMoves++;
             }
             CurrentPlayer = CurrentPlayer.Opponent();
-            UpdateStateString();
+            //UpdateStateString();
             CheckForGameOver();
         }
 
@@ -82,11 +82,11 @@
             else if (FiftyMoveRule())
             {
                 Result = Result.Draw(EndReason.FiftyMoveRule);
-            }
+            }/*
             else if (ThreefoldRepetition())
             {
                 Result = Result.Draw(EndReason.ThreefoldRepetition);
-            }
+            }*/
         }
 
         public bool IsGameOver()
@@ -99,7 +99,7 @@
             int fullMoves = noCaptureOrPawnMoves / 2;
             return fullMoves == 50;
         }
-
+        /*
         private void UpdateStateString()
         {
             stateString = new StateString(CurrentPlayer, Board).ToString();
@@ -117,6 +117,6 @@
         private bool ThreefoldRepetition()
         {
             return stateHistory[stateString] == 3;
-        }
+        }*/
     }
 }
