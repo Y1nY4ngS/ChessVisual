@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -15,12 +16,14 @@ namespace ChessUI
         private readonly Image[,] pieceImages = new Image[8, 8];
         private readonly Rectangle[,] highlights = new Rectangle[8, 8];
         private readonly Dictionary<Position, Move> moveCache = [];
+        private readonly ObservableCollection<string> moveHistory = new();
 
         private GameState gameState;
         private Position selectedPos = null;
         public MainWindow()
         {
             InitializeComponent();
+            MoveList.ItemsSource = moveHistory;
             InitializeBoard();
 
             gameState = new GameState(Player.White, Board.Initial());
@@ -134,6 +137,7 @@ namespace ChessUI
 
         private void HandleMove(Move move)
         {
+            RecordMove(move);
             gameState.MakeMove(move);
             DrawBoard(gameState.Board);
             SetCursor(gameState.CurrentPlayer);
@@ -206,11 +210,43 @@ namespace ChessUI
             };
         }
 
+        private void RecordMove(Move move)
+        {
+            string notation = MoveNotationFormatter.Format(gameState, move);
+
+            if (string.IsNullOrWhiteSpace(notation))
+            {
+                return;
+            }
+
+            if (gameState.CurrentPlayer == Player.White)
+            {
+                int moveNumber = moveHistory.Count + 1;
+                string entry = $"{moveNumber}. {notation}";
+                moveHistory.Add(entry);
+                MoveList.ScrollIntoView(entry);
+            }
+            else if (moveHistory.Count == 0)
+            {
+                string entry = $"... {notation}";
+                moveHistory.Add(entry);
+                MoveList.ScrollIntoView(entry);
+            }
+            else
+            {
+                int lastIndex = moveHistory.Count - 1;
+                string updatedEntry = $"{moveHistory[lastIndex]} {notation}";
+                moveHistory[lastIndex] = updatedEntry;
+                MoveList.ScrollIntoView(updatedEntry);
+            }
+        }
+
         private void RestartGame()
         {
             selectedPos = null;
             HideHighlights();
             moveCache.Clear();
+            moveHistory.Clear();
             gameState = new GameState(Player.White, Board.Initial());
             DrawBoard(gameState.Board);
             SetCursor(gameState.CurrentPlayer);

@@ -117,6 +117,8 @@ namespace ChessLogic
             {
                 copy[pos] = this[pos].Copy();
             }
+            copy.SetPawnSkipPosition(Player.White, GetPawnSkipPosition(Player.White));
+            copy.SetPawnSkipPosition(Player.Black, GetPawnSkipPosition(Player.Black));
             return copy;
         }
 
@@ -129,7 +131,6 @@ namespace ChessLogic
                 Piece piece = this[pos];
                 counting.Increment(piece.Color, piece.Type);
             }
-
             return counting;
         }
 

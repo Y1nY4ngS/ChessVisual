@@ -5,33 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessUI"
         mc:Ignorable="d"
-        Title="Chess" Width="1000" SizeToContent="Height"
+        Title="Chess" Width="1300" SizeToContent="Height"
         Icon="Assets/icon.ico"
         WindowStartupLocation="CenterScreen"
         Background="Black"
         KeyDown="Window_KeyDown">
-    <Viewbox>
-        <Grid x:Name="BoardGrid"
-              Width="1000"
-              Height="1000"
-              MouseDown="BoardGrid_MouseDown">
-            <Grid.Background>
-                <ImageBrush ImageSource="Assets/Board.png"/>
-            </Grid.Background>
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="320"/>
+        </Grid.ColumnDefinitions>
+        <Viewbox Grid.Column="0">
+            <Grid x:Name="BoardGrid"
+          Width="1000"
+          Height="1000"
+          MouseDown="BoardGrid_MouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Assets/Board.png"/>
+                </Grid.Background>
 
-            <UniformGrid x:Name="HighlightGrid"
-                         Rows="8"
-                         Columns="8">
-                
-            </UniformGrid>
+                <UniformGrid x:Name="HighlightGrid"
+                     Rows="8"
+                     Columns="8">
 
-            <UniformGrid x:Name="PieceGrid"
-                         Rows="8"
-                         Columns="8"
-                         RenderOptions.BitmapScalingMode="HighQuality">
-            </UniformGrid>
+                </UniformGrid>
 
-            <ContentControl x:Name="MenuContainer"/>
-        </Grid>
-    </Viewbox>
+                <UniformGrid x:Name="PieceGrid"
+                     Rows="8"
+                     Columns="8"
+                     RenderOptions.BitmapScalingMode="HighQuality">
+                </UniformGrid>
+
+                <ContentControl x:Name="MenuContainer"/>
+            </Grid>
+        </Viewbox>
+
+        <Border Grid.Column="1"
+                Background="#FF1E1E1E"
+                Padding="20"
+                CornerRadius="8"
+                Margin="20">
+            <DockPanel>
+                <TextBlock Text="Move List"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="0 0 0 10"
+                           DockPanel.Dock="Top"/>
+                <ListBox x:Name="MoveList"
+                         Background="#FF2A2A2A"
+                         Foreground="White"
+                         BorderBrush="#FF444444"
+                         FontSize="24"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            </DockPanel>
+        </Border>
+    </Grid>
 </Window>
