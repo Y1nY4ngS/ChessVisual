@@ -4,7 +4,7 @@ namespace ChessLogic
 {
     public class StateString
     {
-        /*
+        
         private readonly StringBuilder sb = new();
 
         public StateString(Player currentPlayer, Board board)
@@ -17,7 +17,7 @@ namespace ChessLogic
             sb.Append(' ');
             AddEnPassantData(board, currentPlayer);
         }
-
+        
         public override string ToString()
         {
             return sb.ToString();
@@ -140,6 +140,6 @@ namespace ChessLogic
             int rank = 8 - pos.Row;
             sb.Append(file);
             sb.Append(rank);
-        }*/
+        }
     }
 }
